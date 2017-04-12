@@ -44,6 +44,14 @@ var UserSchema = new Schema({
         type: String,
         trim: true
     },
+    role:{
+        type: String,    // org, vol
+        required: 'User Type/ ROLE required: (ORGANIZATION) OR  (VOLUNTEER)'
+        
+    },
+    
+    
+    
     email: {
         type: String,
         trim: true,

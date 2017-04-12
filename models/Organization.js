@@ -2,59 +2,44 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 var OrganizationSchema = {
 
-  user: {
-    type: Schema.ObjectId,
-    ref: 'User' // exclusive for 'user'
-  },  // a reference to whoever created it & only that person can modify the content 
-
-  name: {
+  name: { // need validation: Assignment  7
     type: String,
     default: '',
     trim: true,
     required: 'Name required'
   },
-
-  location: {
-    type: String, // use google earth
-    default: '',
-    trim: true,
-    required: 'Location required'
-
+  
+  user_name: {  
+    type: String, 
+    required: 'need unique user_name'
   },
 
-  contact: {
+  password:{
+    type: String, 
+    required: 'need password'
+  },
+
+  email: {  // need validation: Assignment 7
     //type: Schema.ObjectId,
     type: String,
     default:'',
-    
+    match: [/.+\@.+\..+/, 'Please fill a valid email address'],
   },
 
-  created: {  // need this 
-    type: Date,
-    default: Date.now
+  location: { // use google map: someday!!!
+    type: String, 
+    default: 'City, State, Country',
+    /*trim: true,*/
+    required: 'Enter only City and Country if convenient'
   },
-  
-  totalCamps: {
-    type: Number, // one object can have only one data type 
-    required: ''
+
+  phone:{
     
-  }, // use Google Earth to mark the camps
-  
-  nameOfCamp: {
-    type: String,
-    required: ''
   },
-  
-  socialMediaUrl: {
+  about: { // make organizations share their definite goals on working with the refugeee camp
     type: String,
-    required: 'Enter Link to Verified Social Media Page'
+    default: 'Share Your Philosophy',
   },
-  
-  goal: { // make organizations share their definite goals on working with the refugeee camp
-    type: String,
-    default: '',
-    
-  }
   
 }
 

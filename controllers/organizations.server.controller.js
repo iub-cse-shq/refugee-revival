@@ -1,18 +1,16 @@
 var mongoose = require('mongoose');
-var Organization = require('./../models/Organization.js');
-var errorHandler = require('./errors.server.controller');
+var Organization = require('./../models/Organization.js');  // imports the code 
+var errorHandler = require('./errors.server.controller'); // the file referred return ___ upon error
 var _ = require('lodash');
 
 module.exports.list = function(req, res) {
   Organization.find(function(err, data) {
     if (err) {
       return res.status(400).send({
-
   				message: errorHandler.getErrorMessage(err)
   			});
-    } else {
+    } else{
       console.log("api called");
-
       res.status(200).send(data);
     }
   });
@@ -22,7 +20,8 @@ module.exports.create = function(req, res) {
   var organization = new Organization(req.body);
   organization.user = req.user;
   organization.save(function(err, data) {
-    if (err) {
+  
+  if (err) {
       return res.status(400).send({
 
   				message: errorHandler.getErrorMessage(err)
@@ -49,7 +48,6 @@ exports.delete = function(req, res) {
 	});
 };
 
-
 module.exports.update = function(req, res) {
   var organization = req.organization;
 
@@ -63,6 +61,8 @@ module.exports.update = function(req, res) {
   		}
   	});
 };
+
+
 
 exports.organizationByID = function(req, res, next, id) {
 	Organization.findById(id).populate('user', 'email').exec(function(err, organization) {

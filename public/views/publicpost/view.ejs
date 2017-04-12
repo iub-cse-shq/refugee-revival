@@ -1,0 +1,69 @@
+<% include public/views/common/header.ejs %>
+  <title>Public Posts</title>
+
+  
+
+
+<body>
+
+
+
+  <div class = "container">
+
+  <div class = "jumbotron"> <!-- all the posts will go in here -->
+    <% var tweets = []; %>
+    <% T.get('search/tweets', { q: 'refugee since:2015-12-31', count: 100 }, function(err, data, response) { %>
+    <%= tweets.push(data.statuses; %>
+    <%= for(var i = 0; i < tweets.length; i++){ %>
+    <div class = "threadContent row">
+
+  
+    <%  console.log(tweets[i]); %>
+
+    <% } %>
+    //console.log(data)
+    // now that i have the tweet, i need to store it in an object  })
+
+
+    </div>
+  </div>
+</div>
+
+
+</body>
+
+  <script type="text/javascript" src="vendor/jquery-3.1.1.min.js"></script>  <!-- jquery -->
+  <script type="text/javascript" src="vendor/bootstrap/js/bootstrap.min.js"></script>
+  <script type="text/javascript" src="script.js"></script>
+  <script>
+
+  var Twit = require('twit')
+  var T = new Twit({  // these are the configurations
+    consumer_key:         'vuOI5ndPbxYV12E90FqsbDpRD',
+    consumer_secret:      'asRbZn6wA8bGhaDySZAL0oVOTgcZNU9vmVC1ocbaQMHS4ENgIl',
+    access_token:         '592963009-qV8nWwS8CyVyHBzlneGJTwlAW6t6U4FaSM2iPCxa',
+    access_token_secret:  '7iiI5kt4wwsamIlASM5MBi0RQUGl83crY3Kxik5lkbKpu',
+    timeout_ms:           60*1000,  // optional HTTP request timeout to apply to all requests.
+  })
+
+  var params = {
+    q: 'rohingya refugee'
+    count: 100
+  }
+
+  //
+  //  search twitter for all tweets containing the word 'refugee' since December 31, 2015
+  //
+  T.get('search/tweets', { q: 'refugee since:2015-12-31', count: 100 }, function(err, data, response) {
+    var tweets = data.statuses;
+
+    for(var i = 0; i < tweets.length; i++){
+      console.log(tweets[i].text);
+    }
+    //console.log(data)
+    // now that i have the tweet, i need to store it in an object  })
+
+  </script>
+
+
+<% include public/views/common/footer.ejs %>

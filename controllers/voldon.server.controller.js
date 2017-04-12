@@ -1,58 +1,58 @@
 var mongoose = require('mongoose');
-var Product = require('./../models/Product.js');
+var Vol_don = require('./../models/Vol_don.js');
 var errorHandler = require('./errors.server.controller');
 var _ = require('lodash');
 
 module.exports.list = function(req, res) {
-  
-  Product.find(function(err, data) {
-    
+  Vol_don.find(function(err, data) {
     if (err) {
       return res.status(400).send({
+
   				message: errorHandler.getErrorMessage(err)
   			});
-    }else {
-      
+    } else {
       console.log("api called");
+
       res.status(200).send(data);
-    
-    	
     }
   });
 };
 
 exports.new = function(req, res) {
-	res.render('./../public/views/product/create.ejs', {
+	res.render('./../public/views/vol_don/create.ejs', {
 		user: req.user || null,
 		request: req
 	});
 };
 
 exports.all = function(req, res) {  // 9:00 change made in class 
-	res.render('./../public/views/product/list.ejs', {
-		user: req.user || null,
+	res.render('./../public/views/vol_don/list.ejs', {											// { is the start of a JSON 
+		user: req.user || null,	// sends session info, also request object
 		request: req
 	});
 };
+
 
 exports.view = function(req, res) {  // 9:00 change made in class 
-	res.render('./../public/views/product/view.ejs', {
+	res.render('./../public/views/vol_don/view.ejs', {
 		user: req.user || null,
 		request: req
 	});
 };
+
 
 exports.edit = function(req, res) {  // 9:00 change made in class 
-	res.render('./../public/views/product/edit.ejs', {
+	res.render('./../public/views/vol_don/edit.ejs', {
 		user: req.user || null,
 		request: req
 	});
 };
 
+
 module.exports.create = function(req, res) {
-  var product = new Product(req.body);
-  product.user = req.user;
-  product.save(function(err, data) {
+  var vol_don = new Vol_don(req.body);
+  vol_don.user = req.user;
+  vol_don.save(function(err, data) {
     if (err) {
       return res.status(400).send({
 
@@ -65,40 +65,41 @@ module.exports.create = function(req, res) {
 };
 
 module.exports.read = function(req, res) {
-  res.json(req.product);
+  res.json(req.vol_don);
 };
 
 
 exports.delete = function(req, res) {
-	var product = req.product;
-	product.remove(function(err) {
+	var vol_don = req.vol_don;
+	vol_don.remove(function(err) {
 		if (err) {
 			return res.status(400).send();
 		} else {
-			res.json(product);
+			res.json(vol_don);
 		}
 	});
 };
 
+
 module.exports.update = function(req, res) {
-  var product = req.product;
+  var vol_don = req.vol_don;
 
-  	product = _.extend(product, req.body);
+  	vol_don = _.extend(vol_don, req.body);
 
-  	product.save(function(err) {
+  	vol_don.save(function(err) {
   		if (err) {
   			return res.status(400).send();
   		} else {
-  			res.json(product);
+  			res.json(vol_don);
   		}
   	});
 };
 
-exports.productByID = function(req, res, next, id) {
-	Product.findById(id).populate('user', 'email').exec(function(err, product) {
+exports.vol_donByID = function(req, res, next, id) {
+	Vol_don.findById(id).populate('user', 'email').exec(function(err, vol_don) {
 		if (err) return next(err);
-		if (!product) return next(new Error('Failed to load product ' + id));
-		req.product = product;
+		if (!vol_don) return next(new Error('Failed to load vol_don ' + id));
+		req.vol_don = vol_don;
 		next();
 	});
-}
+};

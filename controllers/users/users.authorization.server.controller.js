@@ -10,6 +10,8 @@ var _ = require('lodash'),
 /**
  * User middleware
  */
+ 
+ 
 exports.userByID = function(req, res, next, id) {
 	User.findOne({
 		_id: id
@@ -23,10 +25,14 @@ exports.userByID = function(req, res, next, id) {
 	});
 };
 
+
+
 /**
  * Require login routing middleware
  */
-exports.requiresLogin = function(req, res, next) {
+ 
+ 
+exports.requiresLogin = function(req, res, next) {	// 10:1 checks if logged in 
 		if (!req.isAuthenticated()) {
 		return res.status(401).send({
 			message: 'User is not logged in'
@@ -35,6 +41,28 @@ exports.requiresLogin = function(req, res, next) {
 
 	next();
 };
+
+
+exports.checkForVolorOrg = function(req, res, next) {	// 10:1 checks if logged in 
+		
+		if ( !req.isAuthenticated()) {
+			return res.status(401).send({
+			
+			message: 'User is not logged in'
+			
+			});
+		}
+		
+		if(req.user.role != 'volunteer' || req.user.role !='organization'){
+			return res.status(401).send({
+				message: 'Only Volunteers and Organizations can view the page'	
+			});
+		}
+
+	next();
+};
+
+
 
 /**
  * User authorizations routing middleware

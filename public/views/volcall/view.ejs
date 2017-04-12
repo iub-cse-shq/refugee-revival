@@ -1,0 +1,95 @@
+<% include public/views/common/header.ejs %>
+
+    <title>Refugee Revival - Volunteer Call</title>
+
+   
+
+</head>
+
+<body>
+
+    <!-- Navigation -->
+
+
+    <!-- Full Page Image Background Carousel Header -->
+    <header id="myCarousel" class="carousel slide">
+        <!-- Indicators -->
+        <ol class="carousel-indicators">
+            <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+            <li data-target="#myCarousel" data-slide-to="1"></li>
+            <li data-target="#myCarousel" data-slide-to="2"></li>
+        </ol>
+
+        <!-- Wrapper for Slides -->
+        <div class="carousel-inner">
+            <div class="item active">
+                <div class="fill" style="background-image:url('https://nowtoronto.com/downloads/43711/download/syria8.jpg?cb=051cbcb557c3199b4e61d0989fccef2c One');"></div>
+                <div class="carousel-caption">
+                    <h2>Volunteer Call</h2>
+                </div>
+            </div>
+            <div class="item">
+                <div class="fill" style="background-image:url('http://histclo.com/imagef/date/2014/05/kr-south01s.jpg Two');"></div>
+                <div class="carousel-caption">
+                    <h2>Our Organizations are posting updates from their site of operation.</h2>
+                </div>
+            </div>
+            <div class="item">
+                <div class="fill" style="background-image:url('http://histclo.com/imagef/date/2014/05/kr-south01s.jpg Three');"></div>
+                <div class="carousel-caption">
+                    <h2>Join them as Volunteers</h2>
+                </div>
+            </div>
+        </div>
+
+        <!-- Controls -->
+        <a class="left carousel-control" href="#myCarousel" data-slide="prev">
+            <span class="icon-prev"></span>
+        </a>
+        <a class="right carousel-control" href="#myCarousel" data-slide="next">
+            <span class="icon-next"></span>
+        </a>
+
+    </header>
+
+        <div>
+
+        <div class = "jumbotron"> <!-- all the posts will go in here -->
+            <div class = "thread-content row">
+              <div class = "col-sm-2">
+
+              </div>
+              <div class = "col-sm-8"> <!-- this is where the content goes -->
+                <% var tweets = []; %>
+                <% T.get('search/tweets', { q: 'refugee since:2015-12-31', count: 100 }, function(err, data, response) { %>
+                <%= tweets.push(data.statuses; %>
+                <%= for(var i = 0; i < tweets.length; i++){ %>
+               <div class = "threadContent row">
+               <%  console.log(tweets[i]); %>
+                <% } %>
+              </div>
+
+
+              <div class = "col-sm-2">
+
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+
+    <!-- jQuery -->
+    <script src="js/jquery.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="js/bootstrap.min.js"></script>
+
+    <!-- Script to Activate the Carousel -->
+    <script>
+    $('.carousel').carousel({
+        interval: 5000 //changes the speed
+    })
+    </script>
+
+<% include public/views/common/footer.ejs %>

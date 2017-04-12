@@ -1,0 +1,138 @@
+<!-- create for public page --> 
+
+<!DOCTYPE html5>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+
+    <title>New Volunteer Call</title>
+
+    <!-- General META -->
+    <meta charset="utf-8">
+    <meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+  </head>
+  
+  <body>
+    
+    <h2>Create New Volunteer Call Post</h2>
+    <p>Only ogranization can post blog post for call for volunteer. </p>
+    
+    
+    <!-- should only be able to fill the form if it is an organization --> 
+    
+  <div class="form-horizontal">
+  
+  <div class="form-group">
+    
+    
+  <!--
+      this page should automatically detect the 'username' and 'name' of the Organization
+      also, every post should have its own id set by default 
+  -->
+  
+  <!--  
+    <label for="name" class="col-sm-2 control-label">Organization Name</label>
+    <div class="col-sm-10">
+      <input type="text" class="form-control" id="name" placeholder="UNHCR">
+    </div>
+  </div>
+  --> <!-- not needed --> 
+  
+  <!--
+  <div class="form-group">
+    <label for="price" class="col-sm-2 control-label">Price</label>
+    <div class="col-sm-10">
+      <input type="number" class="form-control" id="price">
+    </div>
+  </div>
+  -->
+  
+  <div class="form-group">
+    <label for="title" class = "col-sm-2 control-label">Title</label>
+    <div class = "col-sm-10">
+      <input type="text" class="form-control" id="title">
+    </div> 
+  </div>
+  
+  <div class="form-group">
+    <label for="body" class="col-sm-2 control-label">Body</label>
+    <div class="col-sm-10">
+      <textarea class="form-control" rows="12" id="body"></textarea>
+    </div>
+  </div>
+  
+  
+  <div class="form-group">
+    <div class="col-sm-offset-2 col-sm-10">
+      <button type="submit" class="btn btn-default" id = "submit">Submit</button>
+    </div>
+  </div>
+
+</div>
+  
+  
+  <footer>
+    
+  </footer>
+  
+  </body>
+  
+  
+  
+  <script src="/lib/jquery/dist/jquery.min.js"></script>
+  <script src="/vendor/ejs_production.js"></script>
+  
+  <script>
+    // make an object of all the attributes
+    var call ={
+      id: //should be default the at the servers end  
+      
+      org_username: // 11:54  I want this data to be retrieved from the organization who's logged on to the page
+      org_name:   // 11:54 
+      org_loc:   // 11: 54
+      
+      // only content of the page 
+      title:"",  // 
+      body:"", // JSON kore ekhane ante hobe   why are  you doing this this is not the wya
+      //idk why are u making these object calls. see my code. we dont need to treat the whole ejs as a whole j query
+      
+      // 11:59 alright
+      
+      // this should also be generated automatically 
+      no_of_response: 0, 
+      status: true,  // Active or Expired: Initially Active  
+      org:""   // The Organization 
+      location:"", // Location of Operation
+      created:,  // current date 
+      
+    }
+
+    $("#submit").click(function(){
+  
+    /*
+      see the call object. see there is a  what go/scroll up
+    */
+    
+    
+    
+      $.ajax({  // ajax is used to send the data to the server side
+        method:"POST",
+        url: '/api/vol/ call',  // QUESTION IS THE API FILE??? 
+        data: call
+      }).done(function(response){
+        console.log(response);  // response on the console 
+        location.href = "";  // go to page saying post has  post was successful 
+      }).fail(function(response){
+        
+        console.log(response);
+        
+      }); 
+    });
+    
+  </script>
+</html>
